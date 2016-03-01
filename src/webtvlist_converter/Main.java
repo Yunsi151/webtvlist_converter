@@ -16,12 +16,12 @@ public class Main {
 			
 			boolean chan_name = true;
 			File output = new File("playlist.m3u");
-			// if file doesnt exists, then create it
+
 			if (!output.exists()) {
 				output.createNewFile();
 			}
 				
-			BufferedReader br = new BufferedReader(new FileReader("C:\\file.txt"));
+			BufferedReader br = new BufferedReader(new FileReader("webtv list.txt"));
 			BufferedWriter bw = new BufferedWriter(new FileWriter(output.getAbsoluteFile()));
 			String channelname = new String();
 			String channelurl = new String();
