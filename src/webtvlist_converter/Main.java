@@ -31,16 +31,19 @@ public class Main {
 			String line = br.readLine();
 
 			    while (line != null) {
-			    	
-			    	if(chan_name == true){
-				    	channelname = line.substring(13);
+			    	if (line.contains("Channel name:")){
+			    		channelname = line.replace("Channel name:", "");
 				    	bw.write("#EXTINF:-1, " + channelname + "\n");
-				    	chan_name = false;
+				    	System.out.println("Channel " + "\""  + channelname + "\"" + " added.");
+			    	}
+
+			    	else if(line.contains("URL:")){
+			    		channelurl = line.replace("URL:","").replace(".ts", ".m3u8");
+			    		bw.write(channelurl + "\n");
+			    		System.out.println("URL for " + "\""  + channelname + "\"" + " added.");
 			    	}
 			    	else {
-			    		channelurl = line.substring(4).replace(".ts", ".m3u8");
-			    		bw.write(channelurl + "\n");
-						chan_name = true;
+			    		System.out.println("Nothing elese to do, reading next line.");
 			    	}
 
 			        line = br.readLine();
@@ -48,9 +51,13 @@ public class Main {
 			    
 			br.close();
 			bw.close();
+			System.out.println("\nPlaylist.m3u finished. Press enter to finish.");
+			System.in.read();
 			
-			
-		} catch (FileNotFoundException e) {	e.printStackTrace();
+		} catch (FileNotFoundException e) {	
+			e.printStackTrace();
+			System.out.println("\nAn error occured. Check your filename and your permissions.");
+			System.in.read();
 		}
 		
 
